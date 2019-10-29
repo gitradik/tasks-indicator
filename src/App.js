@@ -3,7 +3,7 @@ import './App.css';
 import Indicator from './components/indicator/indicator';
 
 function App() {
-    const [counter, setCounter] = useState(0);
+    const [counter, setCounter] = useState(-90);
 
     return (
         <div className="App">
@@ -13,7 +13,7 @@ function App() {
             />
             <button
                 style={{ width: '50px', height: '25px', cursor: 'pointer' }}
-                onClick={() => setCounter(counter + 2)}
+                onClick={() => setCounter(counter + 10)}
             >
                 +
             </button>
