@@ -1,26 +1,24 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
+import Indicator from './components/indicator/indicator';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const [counter, setCounter] = useState(0);
+
+    return (
+        <div className="App">
+            <Indicator
+                from={counter}
+                to={12}
+            />
+            <button
+                style={{ width: '50px', height: '25px', cursor: 'pointer' }}
+                onClick={() => setCounter(counter + 2)}
+            >
+                +
+            </button>
+        </div>
+    );
 }
 
 export default App;

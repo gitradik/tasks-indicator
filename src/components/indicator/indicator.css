@@ -1,0 +1,35 @@
+.indicator {
+    height: 150px;
+    width: 300px;
+    overflow: hidden;
+    display: inline-block;
+    background-color: rgba(0,0,0,.2);
+}
+
+.indicator .indicator-body {
+    background-color: gray;
+    height: 300px;
+    width: 300px;
+    border-radius: 100%;
+}
+
+.indicator .indicator-body .indicator-line {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    background-color: aqua;
+    border-top-left-radius: 50%;
+    border-top-right-radius: 50%;
+    position: relative;
+}
+
+.indicator .indicator-body .indicator-line:before {
+    content: '';
+    height: 70%;
+    width: 70%;
+    border-top-left-radius: 50%;
+    border-top-right-radius: 50%;
+    background-color: red;
+}
