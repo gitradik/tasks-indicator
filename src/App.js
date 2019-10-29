@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
 import './App.css';
-import Indicator from './components/indicator/indicator';
+import IndicatorTest from "./components/indicator.test/indicator.test";
 
 function App() {
-    const [counter, setCounter] = useState(-90);
+    const [counter, setCounter] = useState(8.2);
 
     return (
         <div className="App">
-            <Indicator
-                from={counter}
-                to={12}
+            <IndicatorTest
+                from={13}
+                to={50}
+                radius={150}
             />
             <button
                 style={{ width: '50px', height: '25px', cursor: 'pointer' }}

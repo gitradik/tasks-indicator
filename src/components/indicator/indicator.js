@@ -6,7 +6,7 @@ class Indicator extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            formDeg: -90
+            formDeg: 0
         };
     }
 
@@ -30,7 +30,7 @@ class Indicator extends React.Component {
             <div className="indicator">
                 <div className="indicator-body">
                     <div className="indicator-line"
-                        style={{ transitionDuration: '1s linear', background: `conic-gradient(from ${this.state.formDeg}deg, transparent, #000)` }}
+                        style={{ background: `conic-gradient(from ${this.state.formDeg}deg, transparent, #000)` }}
                     />
                     <div className="indicator-arrow-body">
                         <div className="indicator-arrow"
