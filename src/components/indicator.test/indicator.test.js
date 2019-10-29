@@ -30,14 +30,12 @@ class IndicatorTest extends React.Component {
 
         circles.forEach(circle => circle.setAttribute('r', radius));
 
-        /* Set meter's wrapper dimension */
         const meterDimension = (radius * 2) + 100;
 
         const wrapper = this.wrapper.current;
         wrapper.style.width = meterDimension + "px";
         wrapper.style.height = meterDimension + "px";
 
-        /* Add strokes to circles  */
         const cf = 2 * Math.PI * radius;
         const semiCf = cf / 2;
 
@@ -48,7 +46,7 @@ class IndicatorTest extends React.Component {
         this.circleLowMask.current.setAttribute("stroke-dasharray", semiCf + "," + cf);
 
         setTimeout(() => {
-            this.range_change_event(semiCf, cf);
+            this.rangeChangeEvent(semiCf, cf);
             this.setState({
                 semiCf: semiCf,
                 cf: cf
@@ -56,7 +54,7 @@ class IndicatorTest extends React.Component {
         }, 0);
     }
 
-    range_change_event = (semiCf, cf) => {
+    rangeChangeEvent = (semiCf, cf) => {
         const percent = this.props.from;
         const meterValue = semiCf - ((percent * (100 / this.props.to) * semiCf) / 100);
         this.circleLowMask.current.setAttribute("stroke-dasharray", meterValue + "," + cf);
@@ -88,7 +86,7 @@ class IndicatorTest extends React.Component {
 
     componentDidUpdate(prevProps, prevState, snapshot) {
         if(prevProps.from !== this.props.from) {
-            this.range_change_event(this.state.semiCf, this.state.cf);
+            this.rangeChangeEvent(this.state.semiCf, this.state.cf);
         }
     }
 

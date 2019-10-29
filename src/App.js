@@ -3,12 +3,12 @@ import './App.css';
 import IndicatorTest from "./components/indicator.test/indicator.test";
 
 function App() {
-    const [counter, setCounter] = useState(8.2);
+    const [counter, setCounter] = useState(0);
 
     return (
         <div className="App">
             <IndicatorTest
-                from={13}
+                from={counter}
                 to={50}
                 radius={150}
             />
