@@ -8,7 +8,9 @@ class Indicator extends React.Component {
             <div className="indicator">
                 <div className="indicator-body">
                     <div className="indicator-line"/>
-                    <div className="indicator-arrow" />
+                    <div className="indicator-arrow-body">
+                        <div className="indicator-arrow"/>
+                    </div>
                 </div>
             </div>
         );

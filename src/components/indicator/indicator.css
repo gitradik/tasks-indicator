@@ -11,6 +11,25 @@
     height: 300px;
     width: 300px;
     border-radius: 100%;
+    position: relative;
+}
+
+.indicator .indicator-body .indicator-arrow-body {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    animation: box 1s ease-in-out infinite;
+}
+
+.indicator .indicator-body .indicator-arrow-body .indicator-arrow {
+    height: 200px;
+    width: 5px;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    background-color: gray;
+    transform: rotate(-40deg);
 }
 
 .indicator .indicator-body .indicator-line {
@@ -21,8 +40,7 @@
     height: 100%;
     border-top-left-radius: 50%;
     border-top-right-radius: 50%;
-    position: relative;
-    background: conic-gradient(from -45deg, transparent, #000);
+    background: conic-gradient(from -40deg, transparent, #000);
 }
 
 .indicator .indicator-body .indicator-line:before {
@@ -32,4 +50,35 @@
     border-top-left-radius: 50%;
     border-top-right-radius: 50%;
     background-color: red;
+}
+
+@keyframes box {
+    0% {
+        transform: translate(-50%, -50%) rotate(3deg);
+    }
+
+    25% {
+        transform: translate(-50%, -50%) rotate(1deg);
+
+    }
+
+    50% {
+        transform: translate(-50%, -50%) rotate(3deg);
+
+    }
+
+    75% {
+        transform: translate(-50%, -50%) rotate(1deg);
+
+    }
+
+    95% {
+        transform: translate(-50%, -50%) rotate(3deg);
+
+    }
+
+    0% {
+        transform: translate(-50%, -50%) rotate(3deg);
+
+    }
 }
