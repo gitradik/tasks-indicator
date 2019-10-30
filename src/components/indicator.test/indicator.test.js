@@ -76,7 +76,9 @@ class IndicatorTest extends React.Component {
                         <circle ref={this.circleOutlineEnds} className="circle outline" cx="50%" cy="50%" />
                     </svg>
                     <div className="body-meter-needle">
-                        <div ref={this.meterNeedle} className="meter-needle"/>
+                        <div ref={this.meterNeedle} className="meter-needle"
+                            style={{ height: `${this.props.radius * 2}px` }}
+                        />
                     </div>
                 </div>
 
