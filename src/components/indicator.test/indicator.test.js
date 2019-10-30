@@ -7,7 +7,10 @@ class IndicatorTest extends React.Component {
         super(props);
         this.state = {
             semiCf: 0,
-            cf: 0
+            cf: 0,
+            radius: 0,
+            mask: 32,
+            range: 30,
         };
         this.wrapper = React.createRef();
         this.circleOutlineCurves = React.createRef();
@@ -19,7 +22,7 @@ class IndicatorTest extends React.Component {
 
     initSpeedometer() {
 
-        const { radius } = this.props;
+        const { radius } = this.state.radius > 0 ? this.state : this.props;
 
         const circles = [
             this.circleOutlineCurves.current,
@@ -45,11 +48,16 @@ class IndicatorTest extends React.Component {
         this.circleOutlineEnds.current.setAttribute("stroke-dasharray", 2 + "," + (semiCf - 2));
         this.circleLowMask.current.setAttribute("stroke-dasharray", semiCf + "," + cf);
 
+        const { innerWidth } = window;
+
         setTimeout(() => {
             this.rangeChangeEvent(semiCf, cf);
             this.setState({
-                semiCf: semiCf,
-                cf: cf
+                semiCf,
+                cf,
+                radius,
+                mask: innerWidth < 575 && radius <= 100 ? Math.ceil(radius * 0.264) : this.state.mask,
+                range: innerWidth < 575 && radius <= 100 ? Math.ceil(radius * 0.264) - 2 : this.state.range,
             });
         }, 0);
     }
@@ -63,25 +71,29 @@ class IndicatorTest extends React.Component {
     };
 
     render() {
+        const { radius } = this.state;
         return (
-            <div className="indicator-test">
+            <div className="indicator-test" style={{ maxHeight: `${radius + 100}px` }}>
                 <div ref={this.wrapper} className="wrapper">
                     <svg className="meter">
                         <circle ref={this.circleOutlineCurves} className="circle outline" cx="50%" cy="50%" />
 
-                        <circle ref={this.circleLow} className="circle range" cx="50%" cy="50%" />
+                        <circle ref={this.circleLow} className="circle range" cx="50%" cy="50%"
+                                style={{ strokeWidth: `${this.state.range}` }}
+                        />
 
-                        <circle ref={this.circleLowMask} className="circle mask" cx="50%" cy="50%" />
+                        <circle ref={this.circleLowMask} className="circle mask" cx="50%" cy="50%"
+                            style={{ strokeWidth: `${this.state.mask}` }}
+                        />
 
                         <circle ref={this.circleOutlineEnds} className="circle outline" cx="50%" cy="50%" />
                     </svg>
                     <div className="body-meter-needle">
                         <div ref={this.meterNeedle} className="meter-needle"
-                            style={{ height: `${this.props.radius * 2}px` }}
+                            style={{ height: `${radius * 2}px` }}
                         />
                     </div>
                 </div>
-
             </div>
         );
     }

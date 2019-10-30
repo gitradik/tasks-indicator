@@ -1,12 +1,12 @@
 .indicator-test {
     overflow: hidden;
-    max-height: 200px;
 }
 
 .indicator-test .wrapper {
     position: relative;
     margin: auto;
     overflow: hidden;
+    max-width: 100%;
 }
 .indicator-test .meter {
     position: absolute;
@@ -22,10 +22,8 @@
 }
 .indicator-test .outline, .mask {
     stroke: #dadada;
-    stroke-width: 40;
 }
 .indicator-test .range {
-    stroke-width: 38;
     stroke: #4dff6c;
 }
 
