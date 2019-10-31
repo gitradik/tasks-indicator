@@ -20,9 +20,22 @@ class IndicatorTest extends React.Component {
         this.meterNeedle = React.createRef();
     }
 
-    initSpeedometer() {
+    onResizeWindow = () => {
+        const {innerWidth} = window;
+        switch (innerWidth) {
+            case innerWidth > 992 && innerWidth < 1199: {
+                //this.initSpeedometer()
+                break;
+            }
+            default: break;
+        }
+    };
 
-        const { radius } = this.state.radius > 0 ? this.state : this.props;
+    initSpeedometer(radius = this.state.radius) {
+
+        if(radius === 0) {
+            radius = this.props.radius;
+        }
 
         const circles = [
             this.circleOutlineCurves.current,
@@ -34,7 +47,6 @@ class IndicatorTest extends React.Component {
         circles.forEach(circle => circle.setAttribute('r', radius));
 
         const meterDimension = (radius * 2) + 100;
-
         const wrapper = this.wrapper.current;
         wrapper.style.width = meterDimension + "px";
         wrapper.style.height = meterDimension + "px";
@@ -44,11 +56,15 @@ class IndicatorTest extends React.Component {
 
         this.circleOutlineCurves.current.setAttribute("stroke-dasharray", semiCf + "," + cf);
         this.circleLow.current.setAttribute("stroke-dasharray", semiCf + "," + cf);
-
         this.circleOutlineEnds.current.setAttribute("stroke-dasharray", 2 + "," + (semiCf - 2));
         this.circleLowMask.current.setAttribute("stroke-dasharray", semiCf + "," + cf);
 
-        const { innerWidth } = window;
+        const {innerWidth} = window;
+        const isLessThan575 = innerWidth < 575 && radius <= 100;
+        let strokeWidth = this.state.mask;
+        if (isLessThan575) {
+            strokeWidth = Math.ceil(radius * 0.264);
+        }
 
         setTimeout(() => {
             this.rangeChangeEvent(semiCf, cf);
@@ -56,8 +72,8 @@ class IndicatorTest extends React.Component {
                 semiCf,
                 cf,
                 radius,
-                mask: innerWidth < 575 && radius <= 100 ? Math.ceil(radius * 0.264) : this.state.mask,
-                range: innerWidth < 575 && radius <= 100 ? Math.ceil(radius * 0.264) - 2 : this.state.range,
+                mask: strokeWidth,
+                range: strokeWidth - 2,
             });
         }, 0);
     }
@@ -66,8 +82,7 @@ class IndicatorTest extends React.Component {
         const percent = this.props.from;
         const meterValue = semiCf - ((percent * (100 / this.props.to) * semiCf) / 100);
         this.circleLowMask.current.setAttribute("stroke-dasharray", meterValue + "," + cf);
-        this.meterNeedle.current.style.transform = "rotate(" +
-             (270 + ((percent * (100 / this.props.to) * 180) / 100)) + "deg)";
+        this.meterNeedle.current.style.transform = "rotate(" + (270 + ((percent * (100 / this.props.to) * 180) / 100)) + "deg)";
     };
 
     render() {
@@ -98,7 +113,7 @@ class IndicatorTest extends React.Component {
         );
     }
 
-    componentDidUpdate(prevProps, prevState, snapshot) {
+    componentDidUpdate(prevProps) {
         if(prevProps.from !== this.props.from) {
             this.rangeChangeEvent(this.state.semiCf, this.state.cf);
         }
@@ -106,6 +121,11 @@ class IndicatorTest extends React.Component {
 
     componentDidMount() {
         this.initSpeedometer();
+        window.addEventListener('resize', this.onResizeWindow);
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener('resize', this.onResizeWindow);
     }
 }
 
