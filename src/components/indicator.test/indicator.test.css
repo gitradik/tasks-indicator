@@ -49,7 +49,11 @@
     width: 15px;
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
+    background: -webkit-gradient(linear, left top, left bottom, from(white), color-stop(50%, white), color-stop(51%, transparent), to(transparent));
+    background: -o-linear-gradient(top, white 0%, white 50%, transparent 51%, transparent 100%);
     background: linear-gradient(to bottom, white 0%, white 50%, transparent 51%, transparent 100%);
+
+    -webkit-clip-path: ellipse(25% 50% at 50% 50%);
 
     clip-path: ellipse(25% 50% at 50% 50%);
     -webkit-transition: 1s;
@@ -62,10 +66,13 @@
     content: '';
     top: 50%;
     left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
     background-color: white;
     height: 15px;
     width: 15px;
+    -webkit-clip-path: circle(50% at 50% 50%);
     clip-path: circle(50% at 50% 50%);
 }
 
