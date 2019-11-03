@@ -13,7 +13,7 @@ function App() {
             <IndicatorTest
                 from={counter}
                 to={to}
-                radius={110}
+                radius={70}
             />
             <button
                 style={{ width: '50px', height: '25px', cursor: 'pointer' }}

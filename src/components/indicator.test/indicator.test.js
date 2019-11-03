@@ -9,7 +9,7 @@ class IndicatorTest extends React.Component {
             semiCf: 0,
             cf: 0,
             radius: 0,
-            mask: 32,
+            mask: 30,
             range: 30,
         };
         this.wrapper = React.createRef();
@@ -19,17 +19,6 @@ class IndicatorTest extends React.Component {
         this.circleOutlineEnds = React.createRef();
         this.meterNeedle = React.createRef();
     }
-
-    onResizeWindow = () => {
-        const {innerWidth} = window;
-        switch (innerWidth) {
-            case innerWidth > 992 && innerWidth < 1199: {
-                //this.initSpeedometer()
-                break;
-            }
-            default: break;
-        }
-    };
 
     initSpeedometer(radius = this.state.radius) {
 
@@ -73,7 +62,7 @@ class IndicatorTest extends React.Component {
                 cf,
                 radius,
                 mask: strokeWidth,
-                range: strokeWidth - 2,
+                range: strokeWidth,
             });
         }, 0);
     }
@@ -121,11 +110,6 @@ class IndicatorTest extends React.Component {
 
     componentDidMount() {
         this.initSpeedometer();
-        window.addEventListener('resize', this.onResizeWindow);
-    }
-
-    componentWillUnmount() {
-        window.removeEventListener('resize', this.onResizeWindow);
     }
 }
 

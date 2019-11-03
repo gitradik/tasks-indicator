@@ -1,5 +1,6 @@
 .indicator-test {
     overflow: hidden;
+    background-color: rgba(0,0,0,.4);
 }
 
 .indicator-test .wrapper {
@@ -32,7 +33,7 @@
 
 .indicator-test .body-meter-needle {
     position: absolute;
-    top: 45px;
+    top: 47px;
     left: 50%;
     z-index: 2;
     -webkit-transform: translateX(-50%);
@@ -43,16 +44,29 @@
 }
 
 .indicator-test .meter-needle {
+    position: relative;
     height: 200px;
-    width: 5px;
+    width: 15px;
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
-    background: -webkit-gradient(linear, left top, left bottom, from(rgb(159, 255, 81)), color-stop(50%, rgb(53, 255, 51)), color-stop(51%, transparent), to(transparent));
-    background: -o-linear-gradient(top, rgb(159, 255, 81) 0%, rgb(53, 255, 51) 50%, transparent 51%, transparent 100%);
-    background: linear-gradient(to bottom, rgb(159, 255, 81) 0%, rgb(53, 255, 51) 50%, transparent 51%, transparent 100%);
+    background: linear-gradient(to bottom, white 0%, white 50%, transparent 51%, transparent 100%);
+
+    clip-path: ellipse(25% 50% at 50% 50%);
     -webkit-transition: 1s;
     -o-transition: 1s;
     transition: 1s;
+}
+
+.indicator-test .meter-needle:before {
+    position: absolute;
+    content: '';
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    height: 15px;
+    width: 15px;
+    clip-path: circle(50% at 50% 50%);
 }
 
 @-webkit-keyframes shaking {
